@@ -39,7 +39,7 @@
 }
 
 .btn:hover {
-  background-color: #b52632;
-  border: 2px solid rgba(0, 0, 0, 1);
-  color: rgba(0, 0, 0, 1);
+  background-color: rgba(0, 0, 0, .3);
+  /* border: 1px solid rgba(0, 0, 0, 1);
+  color: rgba(0, 0, 0, 1); */
 }

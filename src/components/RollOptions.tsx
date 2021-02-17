@@ -36,9 +36,7 @@ function RollOptions(props: Props) {
           decrease={decreaseHungerDice}
           count={hungerDice}
         />
-        <button className='btn'>
-          Roll
-        </button>
+        <button className='btn'>Roll</button>
       </div>
     </section>
   );
