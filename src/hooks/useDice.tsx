@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-type RollResult = 'criticalSuccess' | 'criticalFail' | 'success' | 'fail';
+export type RollResult = 'criticalSuccess' | 'criticalFail' | 'success' | 'fail';
 type FinalResult =
   | 'criticalSuccess'
   | 'bestialFail'
@@ -8,9 +8,9 @@ type FinalResult =
   | 'success'
   | 'fail';
 
-type DiceType = 'regular' | 'hunger' 
+export type DiceType = 'regular' | 'hunger' 
 
-type DiceMap = [
+export type DiceMap = [
   RollResult,
   RollResult,
   RollResult,
