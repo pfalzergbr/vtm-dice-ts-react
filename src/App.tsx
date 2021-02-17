@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import RollOptions from './components/RollOptions';
 import { useStepper } from './hooks/useStepper';
+import './App.css';
 
 function App() {
   const {
@@ -13,7 +14,11 @@ function App() {
     count: hungerDice,
     increaseCount: increaseHungerDice,
     decreaseCount: decreaseHungerDice,
-  } = useStepper(1, 15);
+  } = useStepper(0, 15);
+
+  const roll = () => {
+
+  }
 
   return (
     <div className='App'>
@@ -22,7 +27,7 @@ function App() {
         increaseRegularDice={increaseRegularDice} 
         decreaseRegularDice={decreaseRegularDice} 
         increaseHungerDice={increaseHungerDice} 
-        decreaseHungerDice={increaseHungerDice}
+        decreaseHungerDice={decreaseHungerDice}
         regularDice={regularDice}
         hungerDice={hungerDice} 
       />
