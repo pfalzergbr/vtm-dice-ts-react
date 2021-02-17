@@ -8,7 +8,7 @@ import {
   ResultMessage,
 } from './diceTypes';
 
-import {generateRandomDice} from './diceUtils'
+import {generateRandomDice, calcDicePool} from './diceUtils'
 
 export const regularDiceMap: DiceMap = [
   'criticalSuccess',
@@ -36,8 +36,6 @@ export const hungerDiceMap: DiceMap = [
   'success',
 ];
 
-
-
 export const generateRoll = (
   diceNum: number,
   diceMap: DiceMap,
@@ -51,23 +49,6 @@ export const generateRoll = (
   }
 
   return rollArray;
-};
-
-export const calcDicePool = (
-  dicePool: number,
-  hungerLevel: number
-): {
-  regularDiceNum: number;
-  hungerDiceNum: number;
-} => {
-  const regularDiceNum = dicePool > hungerLevel ? dicePool - hungerLevel : 0;
-
-  const hungerDiceNum = dicePool > hungerLevel ? hungerLevel : dicePool;
-
-  return {
-    regularDiceNum,
-    hungerDiceNum,
-  };
 };
 
 export const evaluateRoll = (rollResult: Dice[]): ResultCount => {
@@ -121,5 +102,6 @@ export const handleRollDice = (dicePool: number, hungerLevel: number): {rollResu
   const hungerRoll = generateRoll(hungerDiceNum, hungerDiceMap, 'hunger');
   const rollResult = [...regularRoll, ...hungerRoll];
   const resultDescription = evaluateRoll(rollResult);
+  console.log(resultDescription)
   return {rollResult};
 };
