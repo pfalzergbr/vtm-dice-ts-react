@@ -5,7 +5,7 @@ import { Dice } from '../hooks/useDice';
 interface Props { dice: Dice }
 
 function DiceElement(props: Props) {
-  const {value, type, result} = props.dice
+  const {value, type } = props.dice
 
   return (
     <div className={`dice-container ${type}-dice`}>

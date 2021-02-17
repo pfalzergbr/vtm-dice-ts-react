@@ -9,7 +9,7 @@ interface Props {
   decreaseHungerDice: () => void;
   regularDice: number;
   hungerDice: number;
-  handleRoll: () => void
+  handleRoll: () => void;
 }
 
 function RollOptions(props: Props) {
@@ -20,12 +20,12 @@ function RollOptions(props: Props) {
     decreaseRegularDice,
     regularDice,
     hungerDice,
-    handleRoll
+    handleRoll,
   } = props;
 
   const handleDiceRoll = () => {
     handleRoll();
-  }
+  };
 
   return (
     <section className='setup-area'>
@@ -42,7 +42,9 @@ function RollOptions(props: Props) {
           decrease={decreaseHungerDice}
           count={hungerDice}
         />
-        <button onClick={handleDiceRoll} className='btn'>Roll</button>
+        <button onClick={handleDiceRoll} className='btn'>
+          Roll
+        </button>
       </div>
     </section>
   );
