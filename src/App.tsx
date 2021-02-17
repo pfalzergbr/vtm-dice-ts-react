@@ -4,6 +4,7 @@ import RollOptions from './components/RollOptions';
 import { useStepper } from './hooks/useStepper';
 import './App.css';
 import DiceField from './components/DiceField';
+import MessageBox from './components/MessageBox';
 
 function App() {
   const {
@@ -31,6 +32,7 @@ function App() {
         hungerDice={hungerDice}
       />
       <DiceField />
+      <MessageBox />
     </div>
   );
 }
