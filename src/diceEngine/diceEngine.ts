@@ -2,10 +2,13 @@ import {
   DiceMap,
   DiceType,
   Dice,
-  RollResult,
+  // RollResult,
   FinalResult,
   ResultCount,
+  // ResultMessage,
 } from './diceTypes';
+
+import {generateRandomDice, calcDicePool} from './diceUtils'
 
 export const regularDiceMap: DiceMap = [
   'criticalSuccess',
@@ -33,12 +36,6 @@ export const hungerDiceMap: DiceMap = [
   'success',
 ];
 
-export const generateRandomDice = (diceMap: DiceMap, type: DiceType): Dice => {
-  const value = Math.floor(Math.random() * 10);
-  const result = diceMap[value];
-  return { value, type, result };
-};
-
 export const generateRoll = (
   diceNum: number,
   diceMap: DiceMap,
@@ -52,23 +49,6 @@ export const generateRoll = (
   }
 
   return rollArray;
-};
-
-export const calcDicePool = (
-  dicePool: number,
-  hungerLevel: number
-): {
-  regularDiceNum: number;
-  hungerDiceNum: number;
-} => {
-  const regularDiceNum = dicePool > hungerLevel ? dicePool - hungerLevel : 0;
-
-  const hungerDiceNum = dicePool > hungerLevel ? hungerLevel : dicePool;
-
-  return {
-    regularDiceNum,
-    hungerDiceNum,
-  };
 };
 
 export const evaluateRoll = (rollResult: Dice[]): ResultCount => {
@@ -95,7 +75,6 @@ export const evaluateRoll = (rollResult: Dice[]): ResultCount => {
     results.hungerCriticalSuccess +
     results.extraCritical;
 
-  console.log(results);
   return results;
 };
 
@@ -103,11 +82,26 @@ export const createMessage = (resultCount: ResultCount): FinalResult => {
   if (resultCount.totalSuccess === 0 && resultCount.criticalFail >= 1)
     return 'bestialFail';
   if (resultCount.totalSuccess === 0) return 'fail';
-  if (resultCount.hungerCriticalSuccess >= 2 && resultCount.criticalSuccess < 2)
+  if (resultCount.hungerCriticalSuccess >= 2 && resultCount.criticalSuccess < resultCount.hungerCriticalSuccess)
     return 'messyCritical';
   if (resultCount.totalSuccess >= 5 && resultCount.extraCritical <= 2)
     return 'criticalSuccess';
   if (resultCount.totalSuccess >= 0 && resultCount.totalSuccess <= 5)
     return 'success';
   return 'pending';
+};
+
+
+export const handleRollDice = (dicePool: number, hungerLevel: number): {rollResult: Dice[] } => {
+  const { regularDiceNum, hungerDiceNum } = calcDicePool(
+    dicePool,
+    hungerLevel
+  );
+
+  const regularRoll = generateRoll(regularDiceNum, regularDiceMap, 'regular');
+  const hungerRoll = generateRoll(hungerDiceNum, hungerDiceMap, 'hunger');
+  const rollResult = [...regularRoll, ...hungerRoll];
+  const resultDescription = evaluateRoll(rollResult);
+  console.log(resultDescription)
+  return {rollResult};
 };

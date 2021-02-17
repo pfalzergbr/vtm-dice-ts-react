@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import { Dice, ResultMessage } from '../diceEngine/diceTypes';
 import {
-  generateRoll,
-  evaluateRoll,
-  calcDicePool,
-  hungerDiceMap,
-  regularDiceMap,
+  handleRollDice
 } from '../diceEngine/diceEngine';
 
 
@@ -20,16 +16,8 @@ export const useDice = (): {
   });
 
   const rollDice = (dicePool: number, hungerLevel: number) => {
-    const { regularDiceNum, hungerDiceNum } = calcDicePool(
-      dicePool,
-      hungerLevel
-    );
-
-    const regularRoll = generateRoll(regularDiceNum, regularDiceMap, 'regular');
-    const hungerRoll = generateRoll(hungerDiceNum, hungerDiceMap, 'hunger');
-    const rollResult = [...regularRoll, ...hungerRoll];
-    evaluateRoll(rollResult);
-    setRollResult(rollResult);
+    const roll = handleRollDice(dicePool, hungerLevel);
+    setRollResult(roll.rollResult);
   };
 
   return { rollDice, rollResult };
