@@ -1,17 +1,20 @@
 import React from 'react';
 
-interface Props {}
+interface Props {
+  increase: () => void
+  decrease: () => void
+}
 
 function Stepper(props: Props) {
-  const {} = props;
+  const {increase, decrease} = props;
 
   return (
     <div className='wrapper'>
       <h2 className='stepper-name'>Dicepool</h2>
 
       <div className='dicepool-stepper'>
-        <span className='next'></span>
-        <span className='previous'></span>
+        <span onClick={increase} className='next'></span>
+        <span onClick={decrease} className='previous'></span>
         <div className='number-box'>
           <span id='dicepool-number'>0</span>
         </div>
