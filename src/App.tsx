@@ -31,7 +31,10 @@ function App() {
         regularDice={regularDice}
         hungerDice={hungerDice}
       />
-      <DiceField />
+      <DiceField 
+        regularDiceResult={[]}
+        hungerDiceResult={[]}
+        />
       <MessageBox />
     </div>
   );
