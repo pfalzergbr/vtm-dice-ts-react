@@ -63,7 +63,7 @@ export const hungerDiceMap: DiceMap = [
 export const useDice = (): {
   generateRandomDice: (diceMap: DiceMap, type: DiceType) => Dice;
   rollResult: Dice[];
-  rollDice: (regularDiceNum: number, hungerDiceNum: number) => void
+  rollDice: (dicePool: number, hungerLevel: number) => void
 } => {
   // const [regularDicePool, setRegularDicePool] = useState<Dice[]>([]);
   // const [hungerDicePool, setHungerDicePool] = useState<Dice[]>([]);
@@ -91,7 +91,24 @@ export const useDice = (): {
 
   const createMessage = () => {};
 
-  const rollDice = (regularDiceNum: number, hungerDiceNum: number) => {
+  const rollDice = (dicePool: number, hungerLevel: number) => {
+    const calcDicePool = (dicePool: number, hungerLevel: number) : { regularDiceNum : number, hungerDiceNum : number} => {
+      const regularDiceNum = dicePool > hungerLevel 
+        ? dicePool - hungerLevel 
+        : 0 
+    
+      const hungerDiceNum = dicePool > hungerLevel
+        ? hungerLevel
+        : dicePool
+
+      return {
+        regularDiceNum,
+        hungerDiceNum
+      }
+    }
+
+    const {regularDiceNum, hungerDiceNum} = calcDicePool(dicePool, hungerLevel);
+
     const regularRoll = generateRoll(regularDiceNum, regularDiceMap, 'regular');
     const hungerRoll = generateRoll(hungerDiceNum, hungerDiceMap, 'hunger');
     const rollResult = [...regularRoll, ...hungerRoll];
