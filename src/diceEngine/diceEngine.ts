@@ -82,7 +82,7 @@ export const createMessage = (resultCount: ResultCount): FinalResult => {
   if (resultCount.totalSuccess === 0 && resultCount.criticalFail >= 1)
     return 'bestialFail';
   if (resultCount.totalSuccess === 0) return 'fail';
-  if (resultCount.hungerCriticalSuccess >= 2 && resultCount.criticalSuccess < 2)
+  if (resultCount.hungerCriticalSuccess >= 2 && resultCount.criticalSuccess < resultCount.hungerCriticalSuccess)
     return 'messyCritical';
   if (resultCount.totalSuccess >= 5 && resultCount.extraCritical <= 2)
     return 'criticalSuccess';

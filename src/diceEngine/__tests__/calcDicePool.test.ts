@@ -1,5 +1,4 @@
 import { calcDicePool } from '../diceUtils'
-import { Dice } from '../diceTypes';
 
 describe('calcDicePool', () => {
 
