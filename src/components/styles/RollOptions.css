@@ -1,0 +1,45 @@
+/* Roll Setup
+==================*/
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.counter-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 500px;
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.stepper-name {
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: lighter;
+}
+
+.setup-area {
+  display: flex;
+}
+
+.btn {
+  /* background-color: #e83140; */
+  background-color: transparent;
+  color: #fff;
+  width: 200px;
+  height: 50px;
+  align-self: flex-end;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  background-color: #b52632;
+  border: 2px solid rgba(0, 0, 0, 1);
+  color: rgba(0, 0, 0, 1);
+}
