@@ -1,11 +1,10 @@
-import React from 'react'
 import './styles/Dice.css'
-import { Dice } from '../hooks/useDice';
+import { Dice } from '../diceEngine/diceTypes';
 
 interface Props { dice: Dice }
 
 function DiceElement(props: Props) {
-  const {value, type, result} = props.dice
+  const {value, type } = props.dice
 
   return (
     <div className={`dice-container ${type}-dice`}>
