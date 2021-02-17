@@ -1,55 +1,11 @@
-// export type RollResult =
-//   | 'hungerCriticalSuccess'
-//   | 'criticalSuccess'
-//   | 'criticalFail'
-//   | 'success'
-//   | 'fail';
-
-// type FinalResult =
-//   | 'criticalSuccess'
-//   | 'bestialFail'
-//   | 'messyCritical'
-//   | 'success'
-//   | 'fail'
-//   | 'pending';
-
-// export type DiceType = 'regular' | 'hunger';
-
-// export type DiceMap = [
-//   RollResult,
-//   RollResult,
-//   RollResult,
-//   RollResult,
-//   RollResult,
-//   RollResult,
-//   RollResult,
-//   RollResult,
-//   RollResult,
-//   RollResult
-// ];
-
-// export interface Dice {
-//   value: number;
-//   type: DiceType;
-//   result: RollResult;
-// }
-
-// export interface ResultCount {
-//   totalSuccess: number,
-//   hungerCriticalSuccess: number,
-//   criticalSuccess: number,
-//   extraCritical: number,
-//   criticalFail: number,
-//   success: number,
-//   fail: number
-// }
-
-// export interface ResultMessage {
-//   result: FinalResult;
-//   message: string;
-// }
-
-import {DiceMap, DiceType, Dice, RollResult, FinalResult, ResultCount } from './diceEngine.d';
+import {
+  DiceMap,
+  DiceType,
+  Dice,
+  RollResult,
+  FinalResult,
+  ResultCount,
+} from './diceTypes';
 
 export const regularDiceMap: DiceMap = [
   'criticalSuccess',
@@ -77,7 +33,6 @@ export const hungerDiceMap: DiceMap = [
   'success',
 ];
 
-
 export const generateRandomDice = (diceMap: DiceMap, type: DiceType): Dice => {
   const value = Math.floor(Math.random() * 10);
   const result = diceMap[value];
@@ -102,9 +57,11 @@ export const generateRoll = (
 export const calcDicePool = (
   dicePool: number,
   hungerLevel: number
-): { regularDiceNum: number; hungerDiceNum: number } => {
-  const regularDiceNum =
-    dicePool > hungerLevel ? dicePool - hungerLevel : 0;
+): {
+  regularDiceNum: number;
+  hungerDiceNum: number;
+} => {
+  const regularDiceNum = dicePool > hungerLevel ? dicePool - hungerLevel : 0;
 
   const hungerDiceNum = dicePool > hungerLevel ? hungerLevel : dicePool;
 
@@ -112,7 +69,7 @@ export const calcDicePool = (
     regularDiceNum,
     hungerDiceNum,
   };
-}
+};
 
 export const evaluateRoll = (rollResult: Dice[]): ResultCount => {
   const results: ResultCount = {
@@ -122,30 +79,35 @@ export const evaluateRoll = (rollResult: Dice[]): ResultCount => {
     extraCritical: 0,
     criticalFail: 0,
     success: 0,
-    fail: 0
-  }
+    fail: 0,
+  };
 
-  rollResult.forEach(dice => {
-    results[dice.result]++
-  })
-  
-  results.extraCritical = Math.floor((results.criticalSuccess + results.hungerCriticalSuccess) / 2 ) * 2
-  results.totalSuccess = results.success + results.criticalSuccess + results.hungerCriticalSuccess + results.extraCritical;
-  
-  console.log(results)
+  rollResult.forEach((dice) => {
+    results[dice.result]++;
+  });
+
+  results.extraCritical =
+    Math.floor((results.criticalSuccess + results.hungerCriticalSuccess) / 2) *
+    2;
+  results.totalSuccess =
+    results.success +
+    results.criticalSuccess +
+    results.hungerCriticalSuccess +
+    results.extraCritical;
+
+  console.log(results);
   return results;
-  }
+};
 
-export const createMessage = (resultCount:ResultCount): FinalResult => {
-    if (resultCount.totalSuccess === 0 && resultCount.criticalFail >= 1)
-      return 'bestialFail';
-    if (resultCount.totalSuccess === 0)
-      return 'fail';
-    if (resultCount.hungerCriticalSuccess >= 2 && resultCount.criticalSuccess < 2)
-      return 'messyCritical';
-    if (resultCount.totalSuccess >= 5 && resultCount.extraCritical <= 2)
-      return 'criticalSuccess';
-    if (resultCount.totalSuccess >= 0 && resultCount.totalSuccess <= 5)
-      return 'success';
-    return 'pending';
+export const createMessage = (resultCount: ResultCount): FinalResult => {
+  if (resultCount.totalSuccess === 0 && resultCount.criticalFail >= 1)
+    return 'bestialFail';
+  if (resultCount.totalSuccess === 0) return 'fail';
+  if (resultCount.hungerCriticalSuccess >= 2 && resultCount.criticalSuccess < 2)
+    return 'messyCritical';
+  if (resultCount.totalSuccess >= 5 && resultCount.extraCritical <= 2)
+    return 'criticalSuccess';
+  if (resultCount.totalSuccess >= 0 && resultCount.totalSuccess <= 5)
+    return 'success';
+  return 'pending';
 };

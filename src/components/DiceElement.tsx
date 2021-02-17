@@ -1,6 +1,5 @@
-import React from 'react'
 import './styles/Dice.css'
-import { Dice } from '../hooks/useDice';
+import { Dice } from '../diceEngine/diceTypes';
 
 interface Props { dice: Dice }
 
