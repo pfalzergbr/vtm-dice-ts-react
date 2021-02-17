@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { generateRoll, evaluateRoll, calcDicePool } from '../diceEngine/diceEngine';
+
 export type RollResult =
   | 'hungerCriticalSuccess'
   | 'criticalSuccess'
@@ -40,6 +42,7 @@ export interface ResultCount {
   totalSuccess: number,
   hungerCriticalSuccess: number,
   criticalSuccess: number,
+  extraCritical: number,
   criticalFail: number,
   success: number,
   fail: number
@@ -77,7 +80,6 @@ export const hungerDiceMap: DiceMap = [
 ];
 
 export const useDice = (): {
-  generateRandomDice: (diceMap: DiceMap, type: DiceType) => Dice;
   rollResult: Dice[];
   rollDice: (dicePool: number, hungerLevel: number) => void;
 } => {
@@ -86,80 +88,8 @@ export const useDice = (): {
     result: 'pending',
     message: '',
   });
-
-  const generateRandomDice = (diceMap: DiceMap, type: DiceType): Dice => {
-    const value = Math.floor(Math.random() * 10);
-    const result = diceMap[value];
-    return { value, type, result };
-  };
-
-  const generateRoll = (
-    diceNum: number,
-    diceMap: DiceMap,
-    type: DiceType
-  ): Dice[] => {
-    const rollArray: Dice[] = [];
-
-    for (let i = 0; i < diceNum; i++) {
-      const rolledDice = generateRandomDice(diceMap, type);
-      rollArray.push(rolledDice);
-    }
-
-    return rollArray;
-  };
-
-  const evaluateRoll = (rollResult: Dice[]): ResultCount => {
-    const results: ResultCount = {
-      totalSuccess: 0,
-      hungerCriticalSuccess: 0,
-      criticalSuccess: 0,
-      criticalFail: 0,
-      success: 0,
-      fail: 0
-    }
-
-    rollResult.forEach(dice => {
-      results[dice.result]++
-    })
-    
-    const extraCrits = Math.floor((results.criticalSuccess + results.hungerCriticalSuccess) / 2 ) * 2
-    results.totalSuccess = results.success + results.criticalSuccess + results.hungerCriticalSuccess + extraCrits;
-    
-    return results;
-    }
-
-  const createMessage = (resultCount:ResultCount): FinalResult => {
-
-
-      if (resultCount.totalSuccess === 0 && resultCount.criticalFail >= 1)
-        return 'bestialFail';
-      if (resultCount.totalSuccess === 0)
-        return 'fail';
-      if (resultCount.hungerCriticalSuccess >= 2 && resultCount.criticalSuccess < 2)
-        return 'messyCritical';
-      if (resultCount.totalSuccess >= 0 && resultCount.totalSuccess <= 5)
-        return 'success';
-      return 'pending';
-
-
-  };
-
+  
   const rollDice = (dicePool: number, hungerLevel: number) => {
-    const calcDicePool = (
-      dicePool: number,
-      hungerLevel: number
-    ): { regularDiceNum: number; hungerDiceNum: number } => {
-      const regularDiceNum =
-        dicePool > hungerLevel ? dicePool - hungerLevel : 0;
-
-      const hungerDiceNum = dicePool > hungerLevel ? hungerLevel : dicePool;
-
-      return {
-        regularDiceNum,
-        hungerDiceNum,
-      };
-    }
-
     const { regularDiceNum, hungerDiceNum } = calcDicePool(
       dicePool,
       hungerLevel
@@ -172,6 +102,6 @@ export const useDice = (): {
     setRollResult(rollResult);
   };
 
-  return { generateRandomDice, rollDice, rollResult };
+  return { rollDice, rollResult };
   
 };
