@@ -1,10 +1,12 @@
 import React from 'react';
 import Header from './components/Header';
 import RollOptions from './components/RollOptions';
-import { useStepper } from './hooks/useStepper';
-import './App.css';
 import DiceField from './components/DiceField';
 import MessageBox from './components/MessageBox';
+
+import { useDice } from './hooks/useDice';
+import { useStepper } from './hooks/useStepper';
+import './App.css';
 
 function App() {
   const {
@@ -17,8 +19,12 @@ function App() {
     increaseCount: increaseHungerDice,
     decreaseCount: decreaseHungerDice,
   } = useStepper(0, 5);
+  const { rollResult, rollDice } = useDice();
 
-  const roll = () => {};
+  const handleRoll = () => {
+    rollDice(regularDice, hungerDice);
+  };
+
 
   return (
     <div className='App'>
@@ -30,11 +36,9 @@ function App() {
         decreaseHungerDice={decreaseHungerDice}
         regularDice={regularDice}
         hungerDice={hungerDice}
+        handleRoll={handleRoll}
       />
-      <DiceField 
-        regularDiceResult={[]}
-        hungerDiceResult={[]}
-        />
+      <DiceField rollResult={rollResult} />
       <MessageBox />
     </div>
   );

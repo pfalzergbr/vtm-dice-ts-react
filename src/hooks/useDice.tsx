@@ -8,6 +8,8 @@ type FinalResult =
   | 'success'
   | 'fail';
 
+type DiceType = 'regular' | 'hunger' 
+
 type DiceMap = [
   RollResult,
   RollResult,
@@ -23,6 +25,7 @@ type DiceMap = [
 
 export interface Dice {
   value: number;
+  type: DiceType;
   result: RollResult;
 }
 
@@ -58,25 +61,26 @@ export const hungerDiceMap: DiceMap = [
 ];
 
 export const useDice = (): {
-  generateRandomDice: (diceMap: DiceMap) => Dice;
+  generateRandomDice: (diceMap: DiceMap, type: DiceType) => Dice;
   rollResult: Dice[];
+  rollDice: (regularDiceNum: number, hungerDiceNum: number) => void
 } => {
   // const [regularDicePool, setRegularDicePool] = useState<Dice[]>([]);
   // const [hungerDicePool, setHungerDicePool] = useState<Dice[]>([]);
   const [rollResult, setRollResult] = useState<Dice[]>([]);
   const [resultDescription, setResultDescription] = useState(null);
 
-  const generateRandomDice = (diceMap: DiceMap): Dice => {
+  const generateRandomDice = (diceMap: DiceMap, type: DiceType): Dice => {
     const value = Math.floor(Math.random() * 10);
     const result = diceMap[value];
-    return { value, result };
+    return { value, type, result };
   };
 
-  const generateRoll = (diceNum: number, diceMap: DiceMap): Dice[] => {
+  const generateRoll = (diceNum: number, diceMap: DiceMap, type:DiceType): Dice[] => {
     const rollArray: Dice[] = [];
 
     for (let i = 0; i < diceNum; i++) {
-      const rolledDice = generateRandomDice(diceMap);
+      const rolledDice = generateRandomDice(diceMap, type);
       rollArray.push(rolledDice);
     }
 
@@ -88,11 +92,11 @@ export const useDice = (): {
   const createMessage = () => {};
 
   const rollDice = (regularDiceNum: number, hungerDiceNum: number) => {
-    const regularRoll = generateRoll(regularDiceNum, regularDiceMap);
-    const hungerRoll = generateRoll(hungerDiceNum, hungerDiceMap);
+    const regularRoll = generateRoll(regularDiceNum, regularDiceMap, 'regular');
+    const hungerRoll = generateRoll(hungerDiceNum, hungerDiceMap, 'hunger');
     const rollResult = [...regularRoll, ...hungerRoll];
     setRollResult(rollResult);
   };
 
-  return { generateRandomDice, rollResult };
+  return { generateRandomDice, rollDice, rollResult };
 };
