@@ -1,105 +1,102 @@
 import React, { useState } from 'react';
 
-enum NormalRollResult {
-  criticalSuccess = 'Critical Success',
-  success = 'Success',
-  fail = 'Fail',
-}
+export type RollResult = 'criticalSuccess' | 'criticalFail' | 'success' | 'fail';
+type FinalResult =
+  | 'criticalSuccess'
+  | 'bestialFail'
+  | 'messyCritical'
+  | 'success'
+  | 'fail';
 
-enum HungerRollResult {
-  criticalSuccess = 'Critical Success',
-  criticalFail = 'Critical Failiure',
-  success = 'Success',
-  fail = 'Fail',
-}
+export type DiceType = 'regular' | 'hunger' 
 
-interface RegularDice {
+export type DiceMap = [
+  RollResult,
+  RollResult,
+  RollResult,
+  RollResult,
+  RollResult,
+  RollResult,
+  RollResult,
+  RollResult,
+  RollResult,
+  RollResult
+];
+
+export interface Dice {
   value: number;
-  result: NormalRollResult
+  type: DiceType;
+  result: RollResult;
 }
 
-interface HungerDice {
-  value: number;
-  result: HungerRollResult
+export interface ResultMessage {
+  result: FinalResult;
+  message: string;
 }
 
-interface DiceMap  {
-  0: string,
-  1: string,
-  2: string,
-  3: string,
-  4: string,
-  5: string,
-  6: string,
-  7: string,
-  8: string,
-  9: string,
-}
+export const regularDiceMap: DiceMap = [
+  'criticalSuccess',
+  'fail',
+  'fail',
+  'fail',
+  'fail',
+  'fail',
+  'success',
+  'success',
+  'success',
+  'success',
+];
 
-export const useDice = (): { generateRandomDice: (diceMap: DiceMap) => number } => {
-  const [regularDicePool, setRegularDicePool] = useState<RegularDice[]>([]); 
-  const [hungerDicePool, setHungerDicePool] = useState<HungerDice[]>([]);
-  const [rollResult, setRollResult ] = useState<RegularDice[] | HungerDice[]>([]);
+export const hungerDiceMap: DiceMap = [
+  'criticalSuccess',
+  'criticalFail',
+  'fail',
+  'fail',
+  'fail',
+  'fail',
+  'success',
+  'success',
+  'success',
+  'success',
+];
+
+export const useDice = (): {
+  generateRandomDice: (diceMap: DiceMap, type: DiceType) => Dice;
+  rollResult: Dice[];
+  rollDice: (regularDiceNum: number, hungerDiceNum: number) => void
+} => {
+  // const [regularDicePool, setRegularDicePool] = useState<Dice[]>([]);
+  // const [hungerDicePool, setHungerDicePool] = useState<Dice[]>([]);
+  const [rollResult, setRollResult] = useState<Dice[]>([]);
   const [resultDescription, setResultDescription] = useState(null);
 
-  const regularDiceMap: DiceMap = {
-    0: 'Critical Success',
-    1: 'Fail',
-    2: 'Fail',
-    3: 'Fail',
-    4: 'Fail',
-    5: 'Fail',
-    6: 'Success',
-    7: 'Success',
-    8: 'Success',
-    9: 'Success',
-  }
+  const generateRandomDice = (diceMap: DiceMap, type: DiceType): Dice => {
+    const value = Math.floor(Math.random() * 10);
+    const result = diceMap[value];
+    return { value, type, result };
+  };
 
-  const hungerDiceMap: DiceMap = {
-    0: 'Critical Success',
-    1: 'Bestial Failiure',
-    2: 'Fail',
-    3: 'Fail',
-    4: 'Fail',
-    5: 'Fail',
-    6: 'Success',
-    7: 'Success',
-    8: 'Success',
-    9: 'Success',
-  }
+  const generateRoll = (diceNum: number, diceMap: DiceMap, type:DiceType): Dice[] => {
+    const rollArray: Dice[] = [];
 
+    for (let i = 0; i < diceNum; i++) {
+      const rolledDice = generateRandomDice(diceMap, type);
+      rollArray.push(rolledDice);
+    }
 
-  const generateRandomDice = (diceMap: DiceMap) : number => {
-    const value = Math.floor(Math.random()*10)
-    return value;
-    // const result = diceMap[value]
-    
-  }
+    return rollArray;
+  };
 
-  const generateRoll = ( diceNum: number)  => {
-    // let rollArray: number[]
-    // for ( let i = 0; i < diceNum; i++){
-    //   const rolledNumber = generateRandomDice()
-    // }
-  }
+  const evaluateRoll = () => {};
 
-  const createMessage = () => {
+  const createMessage = () => {};
 
-  }
+  const rollDice = (regularDiceNum: number, hungerDiceNum: number) => {
+    const regularRoll = generateRoll(regularDiceNum, regularDiceMap, 'regular');
+    const hungerRoll = generateRoll(hungerDiceNum, hungerDiceMap, 'hunger');
+    const rollResult = [...regularRoll, ...hungerRoll];
+    setRollResult(rollResult);
+  };
 
-  const evaluateRoll = () => {
-
-  }
-
-  const rollDice = ( normalDiceNum: number, hungerDiceNum: number ) => {
-
-  }
-
-  
-
-
-
-  return { generateRandomDice, }
-}
-
-
+  return { generateRandomDice, rollDice, rollResult };
+};

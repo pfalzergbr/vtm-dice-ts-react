@@ -1,0 +1,32 @@
+
+.dice-container {
+  background-size: cover;
+  background-position: center;
+  width: 75px;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.regular-dice {
+  /* background: url('.public/resources/img/d10-white.png'); */
+  background: url('../../img/d10-white.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.hunger-dice {
+  /* background: url('.public/resouces/img/d10-black.png'); */
+  background: url('../../img/d10-black.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.dice-container h2 {
+  color: #fff;
+}
+
+.dice-container .blood-dice-value {
+  color: black;
+}

@@ -1,13 +1,21 @@
-import React from 'react'
+import React from 'react';
 
-interface Props {}
+import { Dice } from '../hooks/useDice';
+import DiceElement from './DiceElement';
+import './styles/DiceField.css';
+
+interface Props { rollResult: Dice[],}
 
 function DiceField(props: Props) {
-  const {} = props
+  const {rollResult} = props;
 
   return (
-    <div></div>
-  )
+    <section className='diceroll-area'>
+      <div className='dicebox'>
+        {rollResult && rollResult.map((dice, index) => <DiceElement key={index} dice={dice} />)}
+      </div>
+    </section>
+  );
 }
 
-export default DiceField
+export default DiceField;
