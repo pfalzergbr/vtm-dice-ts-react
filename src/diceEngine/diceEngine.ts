@@ -2,10 +2,10 @@ import {
   DiceMap,
   DiceType,
   Dice,
-  RollResult,
+  // RollResult,
   FinalResult,
   ResultCount,
-  ResultMessage,
+  // ResultMessage,
 } from './diceTypes';
 
 import {generateRandomDice, calcDicePool} from './diceUtils'
