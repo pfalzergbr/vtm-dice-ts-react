@@ -14,7 +14,7 @@ function App() {
     count: hungerDice,
     increaseCount: increaseHungerDice,
     decreaseCount: decreaseHungerDice,
-  } = useStepper(0, 15);
+  } = useStepper(0, 5);
 
   const roll = () => {
 
