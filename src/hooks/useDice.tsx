@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { Dice, ResultMessage } from '../diceEngine/diceTypes';
 import {
   handleRollDice
-} from '../diceEngine/diceEngine';
+} from '../diceEngine/handleRollDice';
 
 
 export const useDice = (): {
   rollResult: Dice[];
   rollDice: (dicePool: number, hungerLevel: number) => void;
+  resultDescription: ResultMessage
 } => {
   const [rollResult, setRollResult] = useState<Dice[]>([]);
   const [resultDescription, setResultDescription] = useState<ResultMessage>({
@@ -16,11 +17,11 @@ export const useDice = (): {
   });
 
   const rollDice = (dicePool: number, hungerLevel: number) => {
-    const {rollResult, finalResult} = handleRollDice(dicePool, hungerLevel);
+    const {rollResult, resultMessage} = handleRollDice(dicePool, hungerLevel);
     setRollResult(rollResult);
-    // setResultDescription(finalResult)
+    setResultDescription(resultMessage)
   
   };
 
-  return { rollDice, rollResult };
+  return { rollDice, rollResult, resultDescription };
 };

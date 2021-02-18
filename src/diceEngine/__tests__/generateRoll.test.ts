@@ -1,4 +1,4 @@
-import { regularDiceMap, hungerDiceMap} from '../diceEngine'
+import { regularDiceMap, hungerDiceMap} from '../handleRollDice'
 import {generateRoll} from '../generateRoll';
 
 describe('generateRoll', () => {

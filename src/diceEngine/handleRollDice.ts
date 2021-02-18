@@ -1,11 +1,9 @@
-import { DiceMap, Dice } from './diceTypes';
+import { DiceMap, Dice, ResultMessage } from './diceTypes';
 import { generateRoll } from './generateRoll';
 import { calcDicePool } from './diceUtils';
 import { evaluateRoll } from './evaluateRoll';
 import { createFinalResult } from './createFinalResult';
 import { createMessage } from './createMessage';
-
-import { FinalResult } from './diceTypes';
 
 export const regularDiceMap: DiceMap = [
   'criticalSuccess',
@@ -36,12 +34,13 @@ export const hungerDiceMap: DiceMap = [
 export const handleRollDice = (
   dicePool: number,
   hungerLevel: number
-): { rollResult: Dice[]; finalResult: FinalResult } => {
+): { rollResult: Dice[]; resultMessage: ResultMessage } => {
   const { regularDiceNum, hungerDiceNum } = calcDicePool(dicePool, hungerLevel);
   const regularRoll = generateRoll(regularDiceNum, regularDiceMap, 'regular');
   const hungerRoll = generateRoll(hungerDiceNum, hungerDiceMap, 'hunger');
   const rollResult = [...regularRoll, ...hungerRoll];
-  const resultDescription = evaluateRoll(rollResult);
-  const finalResult = createFinalResult(resultDescription);
-  return { rollResult, finalResult };
+  const resultCount = evaluateRoll(rollResult);
+  const finalResult = createFinalResult(resultCount);
+  const resultMessage = createMessage(resultCount, finalResult);
+  return { rollResult, resultMessage };
 };
