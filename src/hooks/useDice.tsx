@@ -16,8 +16,10 @@ export const useDice = (): {
   });
 
   const rollDice = (dicePool: number, hungerLevel: number) => {
-    const roll = handleRollDice(dicePool, hungerLevel);
-    setRollResult(roll.rollResult);
+    const {rollResult, finalResult} = handleRollDice(dicePool, hungerLevel);
+    setRollResult(rollResult);
+    // setResultDescription(finalResult)
+  
   };
 
   return { rollDice, rollResult };

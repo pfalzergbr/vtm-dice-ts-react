@@ -1,8 +1,8 @@
-import { createMessage } from '../diceEngine'
+import { createFinalResult } from '../diceEngine'
 import {  ResultCount } from '../diceTypes';
 
 
-describe('createMessage', () => {
+describe('createFinalResult', () => {
   test('should return success if the roll has successes, but less than two criticals', () => {
     const resultObject: ResultCount = {
       totalSuccess: 3,
@@ -13,7 +13,7 @@ describe('createMessage', () => {
       success: 3,
       fail: 4,
     }
-    const message = createMessage(resultObject);
+    const message = createFinalResult(resultObject);
     expect(message).toBe('success');
   })
 
@@ -27,7 +27,7 @@ describe('createMessage', () => {
       success: 0,
       fail: 4,
     }
-    const message = createMessage(resultObject);
+    const message = createFinalResult(resultObject);
     expect(message).toBe('fail');
   })
 
@@ -41,7 +41,7 @@ describe('createMessage', () => {
       success: 0,
       fail: 4,
     }
-    const message = createMessage(resultObject);
+    const message = createFinalResult(resultObject);
     expect(message).toBe('bestialFail');
   })
 
@@ -55,7 +55,7 @@ describe('createMessage', () => {
       success: 1,
       fail: 2,
     }
-    const message = createMessage(resultObject);
+    const message = createFinalResult(resultObject);
     expect(message).toBe('criticalSuccess');
   })
 
@@ -69,7 +69,7 @@ describe('createMessage', () => {
       success: 1,
       fail: 2,
     }
-    const message = createMessage(resultObject);
+    const message = createFinalResult(resultObject);
     expect(message).toBe('messyCritical');
   })
 })
