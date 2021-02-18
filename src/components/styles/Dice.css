@@ -18,15 +18,16 @@
 
 .hunger-dice {
   /* background: url('.public/resouces/img/d10-black.png'); */
-  background: url('../../img/d10-black.png');
+  background: url('../../img/d10-red.png');
   background-size: cover;
   background-position: center;
+  color: #680c13;
 }
 
 .dice-container h2 {
   color: #fff;
 }
 
-.dice-container .blood-dice-value {
+/* .dice-container .hunger-value {
   color: black;
-}
+} */
