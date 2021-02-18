@@ -1,4 +1,4 @@
-import { evaluateRoll } from '../diceEngine'
+import { evaluateRoll } from '../evaluateRoll'
 import { Dice, ResultCount } from '../diceTypes';
 
 describe('evaluateRoll', () => {
