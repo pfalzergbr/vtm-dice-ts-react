@@ -11,7 +11,7 @@ describe('createMessage', () => {
       criticalFail: 0,
       success: 0,
       fail: 4,}
-    const finalResult:FinalResult = 'success'
+    const finalResult:FinalResult = 'fail'
     const expectedResult: ResultMessage = {
       result: 'fail',
       message: 'No successes'
@@ -41,8 +41,9 @@ describe('createMessage', () => {
   })
 
   test('should return the correct message when the roll is a critical success', () => {
-    const resultCount: ResultCount = { totalSuccess: 3,
-      hungerCriticalSuccess: 7,
+    const resultCount: ResultCount = { 
+      totalSuccess: 7,
+      hungerCriticalSuccess: 0,
       criticalSuccess: 2,
       extraCritical: 2,
       criticalFail: 0,
@@ -51,7 +52,7 @@ describe('createMessage', () => {
     const finalResult:FinalResult = 'criticalSuccess'
     const expectedResult: ResultMessage = {
       result: 'criticalSuccess',
-      message: '3 successes, 2 critical, 7 successes all together. Critical Success!'
+      message: '3 successes, 2 criticals, 7 successes all together. Critical Success!'
     }
     
     const result: ResultMessage = createMessage(resultCount, finalResult);
@@ -68,10 +69,10 @@ describe('createMessage', () => {
       success: 1,
       fail: 2,
     }
-    const finalResult:FinalResult = 'success'
+    const finalResult:FinalResult = 'messyCritical'
     const expectedResult: ResultMessage = {
       result: 'messyCritical',
-      message: '1 success, 2 criticals, 5 successes all together. Messy Critical!'
+      message: '1 success, 2 criticals on hunger dice, 5 successes all together. Messy Critical!'
     }
     
     const result: ResultMessage = createMessage(resultCount, finalResult);
@@ -88,7 +89,7 @@ describe('createMessage', () => {
       success: 0,
       fail: 4,
     }
-    const finalResult:FinalResult = 'success'
+    const finalResult:FinalResult = 'bestialFail'
     const expectedResult: ResultMessage = {
       result: 'bestialFail',
       message: 'No successes, 1 critical fail. Bestial Failiure!'
