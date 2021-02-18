@@ -1,7 +1,6 @@
-# Vampire the Masquerade 
-## v5 dice roller
+# Vampire the Masquerade v5 dice roller
 
-This is a remake of my first ever web application, written using vanilla JavaScript DOM API. You can find the original repository [here](https://github.com/pfalzergbr/vtm-diceroller). This project is based on the popular role playing game, [**Vampire the Masquerade**](https://www.worldofdarkness.com/). I do not own any rights for the game, this is only a fan project for practicing web development. The application cannot replace the satisfaction of rolling original, physical dice, or the facial expressions of your fellow players and storytellers. 
+This is a remake of my first ever web application, written using vanilla JavaScript DOM API. You can find the original repository [here](https://github.com/pfalzergbr/vtm-diceroller). This project is based on the popular role playing game, [Vampire the Masquerade](https://www.worldofdarkness.com/). I do not own any rights for the game, this is only a fan project for practicing web development. The application cannot replace the satisfaction of rolling original, physical dice, or the facial expressions of your fellow players and storytellers. 
 
 ## Reason
 
@@ -19,7 +18,7 @@ The application is built of three major parts:
 
 The application has no backend functionality. As a simple, single page app, no need for router or Redux. Context may be added, but with only two layers of passing props, did not find it necessary at this point.
 
-##Todos
+## Todos
 
 - Test React Components Behavior
 - Add fonts and text styling
