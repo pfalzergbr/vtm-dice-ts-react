@@ -1,4 +1,4 @@
-import { createMessage } from '../diceEngine';
+import { createMessage } from '../createMessage';
 import { ResultMessage, ResultCount, FinalResult } from '../diceTypes';
 
 describe('createMessage', () => {
