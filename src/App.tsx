@@ -19,7 +19,7 @@ function App() {
     increaseCount: increaseHungerDice,
     decreaseCount: decreaseHungerDice,
   } = useStepper(0, 5);
-  const { rollResult, rollDice } = useDice();
+  const { rollResult, rollDice, resultDescription } = useDice();
 
   const handleRoll = () => {
     rollDice(regularDice, hungerDice);
@@ -39,7 +39,7 @@ function App() {
         handleRoll={handleRoll}
       />
       <DiceField rollResult={rollResult} />
-      <MessageBox />
+      <MessageBox resultDescription={resultDescription}/>
     </div>
   );
 }

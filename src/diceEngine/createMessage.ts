@@ -15,6 +15,9 @@ export const createMessage = (
   const successMessage = `${success} ${
     success === 1 ? 'success' : 'successes'
   }`;
+  const totalSuccessMessage = `${totalSuccess} ${
+    totalSuccess === 1 ? 'success' : 'successes'
+  }`;
   const criticalSuccessMessage = `${criticalSuccess} ${
     criticalSuccess === 1 ? 'critical' : 'criticals'
   }`;
@@ -37,7 +40,7 @@ export const createMessage = (
     case 'success':
       return {
         result: 'success',
-        message: successMessage,
+        message: totalSuccessMessage,
       };
     case 'criticalSuccess':
       return {
