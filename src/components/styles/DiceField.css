@@ -1,13 +1,18 @@
 /*Dice Roll Area
 =================*/
 
+.diceroll-area {
+  grid-row: 4/5;
+
+}
+
 .dicebox {
   display: flex;
   max-width: 500px;
   min-height: 180px;
   width: 90vw;
   padding: 15px;
-  margin: 20px auto;
+  margin: 0 auto;
   flex-wrap: wrap;
   justify-content: space-around;
   background: rgba(0, 0, 0, 0.3);

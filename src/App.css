@@ -20,12 +20,15 @@
   width: 100vw;
   height: 100vh;
   max-height: 100vh;
-  background: linear-gradient(.45deg, #680c13,black);
+  background: linear-gradient(.45deg, #52070d,black);
   background-size: cover;
   background-repeat: no-repeat;
   font-family: serif;
   color: #fff;
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
+  display: grid;
+  grid-row-gap: 2rem;
+  grid-template-rows: 1fr repeat(3, min-content) 5fr;
 }
 

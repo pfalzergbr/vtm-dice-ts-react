@@ -7,7 +7,7 @@ function MessageBox(props: Props) {
   const {message} = props.resultDescription;
 
   return (
-    <section className='result area'>
+    <section className='result-area'>
       <div className='result-box'>
         <div className='result-message'>
           <p className='result-message-paragraph'>{message}</p>

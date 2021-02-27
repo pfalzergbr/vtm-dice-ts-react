@@ -1,6 +1,10 @@
 /*Result Area
 =================*/
 
+.result-area {
+  grid-row: 5/6;
+}
+
 .result-box {
   display: flex;
   flex-direction: column;
@@ -8,7 +12,7 @@
   min-height: 96px;
   width: 90vw;
   padding: 15px;
-  margin: 20px auto;
+  margin: 0 auto;
   flex-wrap: wrap;
   justify-content: center;
   background: rgba(0, 0, 0, 0.3);
