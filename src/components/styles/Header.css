@@ -1,4 +1,8 @@
 
+.header {
+  grid-row: 2/3;
+}
+
 .logo{
   width: 90vw;
   max-width: 500px;
@@ -7,9 +11,7 @@
 
 
 .img-container{
-  margin-top: 2vh;
   display: flex;
   margin: 0, auto;
   max-width: 100vw;
-  margin-bottom: 2vh;
 }
