@@ -8,6 +8,12 @@
   border-radius: 5px;
 }
 
+.dicepool-stepper-name {
+  font-size: 1rem;
+  margin-bottom: .5rem;
+  text-align: center;
+}
+
 .dicepool-stepper:hover {
   background-color: rgba(0, 0, 0, .3);
   /* border: 1px solid rgba(0, 0, 0, 1);

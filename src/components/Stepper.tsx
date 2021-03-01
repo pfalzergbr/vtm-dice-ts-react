@@ -1,4 +1,3 @@
-import React from 'react';
 import './styles/Stepper.css';
 
 interface Props {
@@ -13,11 +12,22 @@ function Stepper(props: Props) {
 
   return (
     <div className='wrapper'>
-      <h2 className='stepper-name'>{fieldName}</h2>
-
+      <h2 className='dicepool-stepper-name'>{fieldName}</h2>
       <div className='dicepool-stepper'>
-        <span onClick={increase} className='next'></span>
-        <span onClick={decrease} className='previous'></span>
+        <span
+          onClick={increase}
+          className='next'
+          role='button'
+          aria-label='dice count step up'
+          id={`stepper-increase-${fieldName}`}
+        ></span>
+        <span
+          onClick={decrease}
+          className='previous'
+          role='button'
+          aria-label='dice count step down'
+          id={`stepper-decrease-${fieldName}`}
+        ></span>
         <div className='number-box'>
           <span id='dicepool-number'>{count}</span>
         </div>
