@@ -1,4 +1,3 @@
-import React from 'react';
 import './styles/Header.css';
 
 function Header() {
@@ -6,7 +5,7 @@ function Header() {
     <header className='header'>
       <div>
         <div className='img-container'>
-          <img className='logo' src='./resources/img/logo-white.png' />
+          <img className='logo' alt='Vampire the Masquerade logo' src='./resources/img/logo-white.png' />
         </div>
       </div>
     </header>

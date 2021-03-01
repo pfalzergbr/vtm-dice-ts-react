@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Dice } from '../diceEngine/diceTypes';
 import DiceElement from './DiceElement';
 import './styles/DiceField.css';
