@@ -18,18 +18,18 @@ function Stepper(props: Props) {
           onClick={increase}
           className='next'
           role='button'
-          aria-label='dice count step up'
-          id={`stepper-increase-${fieldName}`}
+          aria-label={`${fieldName} count step up`}
+          // id={`stepper-increase-${fieldName}`}
         ></span>
         <span
           onClick={decrease}
           className='previous'
           role='button'
-          aria-label='dice count step down'
-          id={`stepper-decrease-${fieldName}`}
+          aria-label={`${fieldName} count step down`}
+          // id={`stepper-decrease-${fieldName}`}
         ></span>
         <div className='number-box'>
-          <span id='dicepool-number'>{count}</span>
+          <span id={`${fieldName}-number`}>{count}</span>
         </div>
       </div>
     </div>
